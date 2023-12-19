@@ -18,6 +18,7 @@ heal(healing){
 useHeal (target, itemIndex) {
     const item = this.inventory.items[itemIndex];
     target.heal(item.ItemHealing);
+    // const healingMessage = (``)
 }
 
 
@@ -48,6 +49,7 @@ class Item{
 }
 
 class Inventory{
+
     constructor(items){
         this.items = items;
     }
