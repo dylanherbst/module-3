@@ -12,12 +12,18 @@ function addMonster (monsterCollection, monster) {
         }
 };
 addMonster(monsterCollection, "Dragon");
+addMonster(monsterCollection, "Snake");
+addMonster(monsterCollection, "Lion");
+addMonster(monsterCollection, "Bull");
 
 // Part 2: Treasure Hunt with `Map`
 
 const treasureMap = new Map();
 treasureMap.set("Dragon", "Hidden in the volcano's heart.");
 treasureMap.set("Goblin", "Buried under the old oak tree.");
+treasureMap.set("Snake", "Buried under a big rock.");
+treasureMap.set("Lion", "Under a large body of water");
+treasureMap.set("Bull", "Inside an old rundown castle.");
 
 
 function monsterMessage(treasureMap) {
@@ -25,13 +31,14 @@ function monsterMessage(treasureMap) {
     console.log(`${key}: This monsters secret map says the treasure is... ${value}`) 
 };
 
-monsterMessage(treasureMap);
+// monsterMessage(treasureMap);
 
 // Part 3: Secret Messages with `WeakMap`
 
-let player1 = { name: "Alice" };
-let player2 = { name: "Nathan" };
-let player3 = { name: "Creed" };
+let player1 = { name: "Alice", charType: "hobbit" };
+let player2 = { name: "Nathan", charType: "archer" };
+let player3 = { name: "Creed", charType: "knight" };
+let player4 = { name: "Creed", charType: "elf"};
 
 let secretMessages = new WeakMap();
 secretMessages.set(player1, "Meet at dawn near the ancient ruins."); 
@@ -49,9 +56,13 @@ function tellSecret (player) {
     secretMessages.delete(player);
 };
 
-sendSecret(player3, secretMessages, "booooo");
-console.log(secretMessages);
 
+// sendSecret(player3, secretMessages, "booooo");
+// sendSecret(player4, secretMessages, "where is the treasure!!!!!");
+
+console.log(secretMessages);
+tellSecret(player2);
+console.log(secretMessages);
 
 
 
@@ -63,5 +74,5 @@ const gameStateJSON = JSON.stringify(gameState);
 
 const loadedGameState = JSON.parse(gameStateJSON);
 
-console.log(gameStateJSON);
+//console.log(gameStateJSON);
 
