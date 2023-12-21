@@ -11,7 +11,7 @@ function addMonster (monsterCollection, monster) {
             monsterCollection.add(monster);
         }
 };
-//addMonster(monsterCollection, "Dragon");
+addMonster(monsterCollection, "Dragon");
 
 // Part 2: Treasure Hunt with `Map`
 
@@ -25,10 +25,9 @@ function monsterMessage(treasureMap) {
     console.log(`${key}: This monsters secret map says the treasure is... ${value}`) 
 };
 
-//monsterMessage(treasureMap);
+monsterMessage(treasureMap);
 
 // Part 3: Secret Messages with `WeakMap`
-
 
 let player1 = { name: "Alice" };
 let player2 = { name: "Nathan" };
@@ -45,8 +44,15 @@ function sendSecret (player, secretMessagesMap, secretMessages) {
     console.log('Not an opt')
 }
 }
+function tellSecret (player) {
+    console.log(secretMessages.get (player))
+    secretMessages.delete(player);
+};
+
 sendSecret(player3, secretMessages, "booooo");
 console.log(secretMessages);
+
+
 
 
 // Part 4: Managing Game Progress with JSON 
