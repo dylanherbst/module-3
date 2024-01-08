@@ -23,7 +23,6 @@ function truncate(str, max) {
     } else {
         return str.slice (0, max) + '...';
     }
-
 }
 //console.log(truncate('This text will be truncated if it is too long', 25 )) 
  
@@ -357,7 +356,8 @@ function topEarner(salaries) {
 let earn = Object.entries(salaries);
     earn.sort((a, b) => b[1] - a[1]);
 return earn[0];
-};
+}; 
+
 
 //console.log(topEarner(salaries));
 

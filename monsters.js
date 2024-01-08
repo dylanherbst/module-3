@@ -42,7 +42,7 @@ let player4 = { name: "Creed", charType: "elf"};
 
 let secretMessages = new WeakMap();
 secretMessages.set(player1, "Meet at dawn near the ancient ruins."); 
-secretMessages.set(player2, "MAHHHHHHHHH."); 
+secretMessages.set(player2, "AHHHHHHHHH."); 
 
 function sendSecret (player, secretMessagesMap, secretMessages) {
    if(player) {
@@ -68,11 +68,35 @@ console.log(secretMessages);
 
 // Part 4: Managing Game Progress with JSON 
 
+
+
+function saveGame () { 
 const gameState = {monsters: Array.from(monsterCollection), treasures: Array.from(treasureMap), messages: Array.from(secretMessages) };
-
 const gameStateJSON = JSON.stringify(gameState);  
+console.log(gameStateJSON);
+return gameStateJSON;
+};
 
-const loadedGameState = JSON.parse(gameStateJSON);
+saveGame();
+const gameStateJSON = saveGame();
 
-//console.log(gameStateJSON);
+
+function loadGameState(gameStateJSON) {
+    let loaded = JSON.parse(gameStateJSON);
+    console.log(loaded);
+    return loaded
+}
+
+loadGameState(gameStateJSON);
+
+
+// const loadedGameState = JSON.parse(gameStateJSON);
+// console.log(gameStateJSON);
+
+//     const gameState = {monsters: Array.from(monsterCollection), treasures: Array.from(treasureMap), messages: Array.from(secretMessages) };
+//     const gameStateJSON = JSON.stringify(gameState);  
+//     const loadedGameState = JSON.parse(gameStateJSON);
+
+// console.log(gameStateJSON);
+
 
