@@ -198,6 +198,9 @@ let bindCar = car.description.bind(car);
 // setTimeout still uses the bound value from d)
 
 
+
+
+
 // 6. Use the Function prototype to add a new delay(ms) function to all functions, which can 
 // be used to delay the call to that function by ms milliseconds. 
 function multiply(a, b) { 
@@ -205,9 +208,6 @@ function multiply(a, b) {
 } 
  
 //multiply.delay(500)(5, 5); // prints 25 after 500 milliseconds
-
-
-
 
 // a)  Use the example multiply function below to test it with, as above, and assume that all 
 // delayed functions will take two parameters 
@@ -229,14 +229,11 @@ function Multiply(a, b) {
  //Multiply.prototype.delay(500)(5, 5); // prints 25 after 500 milliseconds 
  
 
-//  In JavaScript, the toString method is used to convert an object to a string representation.  
+//  7. In JavaScript, the toString method is used to convert an object to a string representation.  
 // By default, when an object is converted to a String, it returns a string that looks something 
 // like [object Object].  
 // However, we can define our own toString methods for custom objects to provide a more 
 // meaningful string representation. 
-
-
-
  
  
 
@@ -244,10 +241,11 @@ function Person(name, age, gender) {
     this.name = name; 
     this.age = age; 
     this.gender = gender; 
+    this.toString = function () {return 'name:',this.name, 'age:', this.age,'gender:', this.gender};
 
-    Person.prototype.details = function () {
-console.log('name:',this.name, 'age:', this.age,'gender:', this.gender)
-    }
+//     Person.prototype.details = function () {
+// console.log('name:',this.name, 'age:', this.age,'gender:', this.gender)
+//     }
 }
 
 // c)  Create a new constructor function Student that uses call to inherit from Person and 
@@ -255,9 +253,12 @@ console.log('name:',this.name, 'age:', this.age,'gender:', this.gender)
 function Student (name, age, gender, cohort) {
     Person.call (this, name, age, gender);
     this.cohort = cohort;
-    Student.prototype.details = function () {
-        console.log('name:',this.name, 'age:', this.age,'gender:', this.gender, 'cohort:',this.cohort)
-            }
+    this.toString = function () {return 'name:',this.name, 'age:', this.age,'gender:', this.gender, 'cohort:',this.cohort};
+
+
+    // Student.prototype.details = function () {
+    //     console.log('name:',this.name, 'age:', this.age,'gender:', this.gender, 'cohort:',this.cohort)
+    //         }
 
 };
  
@@ -278,6 +279,7 @@ const studen2 = new Student('Ken E', 40, 'male', 4);
 
 // studen1.details();
 // studen2.details();
+// console.log('' + studen1)
 
 
 //onsole.log('person1: '+person1) //prints person1: [object Object] 
@@ -285,6 +287,8 @@ const studen2 = new Student('Ken E', 40, 'male', 4);
 // a)  Define a custom toString method for the Person object that will format and print 
 // their details
 // person1.details();
+
+
 
 
 // 8. The following DigitalClock class uses an interval to print the time every second once 
@@ -331,6 +335,11 @@ class PrecisionClock extends DigitalClock {
         }
 
     }
+
+    // b)  Create a new class AlarmClock that inherits from DigitalClock and adds the 
+// parameter wakeupTime in the format hh:mm. When the clock reaches this time, it 
+// should print a 'Wake Up' message and stop ticking. This wakeupTime parameter should 
+// default to 07:00 if not supplied. 
     class AlarmClock extends DigitalClock {
         constructor(prefix, wakeUpTime) {
             super(prefix);
@@ -352,19 +361,13 @@ class PrecisionClock extends DigitalClock {
             this.timer = setInterval(() => this.checkDisplay(), 1000)
         }
     };
-
-
  
 const myClock = new DigitalClock('my clock:') 
 const myPrecisionClock = new PrecisionClock('my Precision clock:', 10000) 
 const myAlarmClock = new AlarmClock('ALARM', '15:41');
 // myClock.start() 
 //myPrecisionClock.start()
-myAlarmClock.start();
+//myAlarmClock.start();
 
 
  
-// b)  Create a new class AlarmClock that inherits from DigitalClock and adds the 
-// parameter wakeupTime in the format hh:mm. When the clock reaches this time, it 
-// should print a 'Wake Up' message and stop ticking. This wakeupTime parameter should 
-// default to 07:00 if not supplied. 
