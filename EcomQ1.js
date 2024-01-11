@@ -81,6 +81,16 @@ class Product {
 
     }
 }
+class Book extends Product  {
+    constructor (name, price, year, author) {
+        super (name, price);
+    this.year = year;
+    this.author = author;
+    this.name = name;
+    }
+}
+
+
 //Exercise 8: Simulating Transactions and Handling Errors
    class Cart {
     #discount= new Map();;
@@ -89,11 +99,6 @@ class Product {
         this.cartItems = [];
     
     }
-    // discounts = [
-    //     {name: '10off', isApplied: true, percentage: 0.1},
-    //     {name: '15off', isApplied: true, percentage: 0.15},
-    //     {name: '20off', isApplied: false, percentage: 0.2}
-    // ];
 
         addItem(product, quantity) {
             if (product instanceof Product && typeof quantity === 'number' && quantity > 0) {
@@ -120,8 +125,6 @@ class Product {
                     return {...item, quantity: Math.max(item.quantity - amount, 0) };
                 } else {
                     return item }}).filter(item => item.quantity > 0);
-      
-            
         }
 
 
@@ -197,12 +200,6 @@ const nikeShirt = new Product("nikeShirt-DriFit", 80, "XL", "black")
 // and a prototype method to display its info. 
 // Tip: Define properties inside the constructor function and methods on the prototype. 
 
-// function makeBook (year, author, title) {
-//     this.year = year;
-//     this.author = author;
-//     this.title = title;
-
-// }
 
 // makeBook.prototype.displayInfo = function() {
 //     console.log(`Title: ${this.title}, Author: ${this.author}, Year: ${this.year}`);
@@ -236,12 +233,25 @@ customer1.addDiscount('90off', true, 0.90);
 //customer1.checkDiscountCode('10off');
 //customer1.CalculateTotal('90off');
 customer1.displayCart();
+let powerVsForce = new Book ("Power Vs Force by Dr Hawkins", 50, 2000, "Dr Hawkins")
+
 //customer1.CalculateTotal('10off');
 customer1.CalculateTotal();
 customer1.removeItemByName('samsung10k', 2);
 customer1.displayCart();
 customer1.sortByPrice();
+customer1.addItem(powerVsForce, 3);
+customer1.displayCart();
 
+console.log(powerVsForce)
 // else {   console.log(`${useCode} Invalid Discount Code`)
 // return false;
 // }
+
+// // // PRODUCTS LIST // // //
+
+// const samsung89 = new Product("samsung10k", 10000, "samsung Flat Tv", "89inch", "led") 
+
+// const nikeShirt = new Product("nikeShirt-DriFit", 80, "XL", "black")
+
+// // // PRODUCTS LIST // // //
