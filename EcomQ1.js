@@ -172,7 +172,6 @@ checkDiscountCode(code) {
 }
 ;
 
-
 // // // PRODUCTS LIST // // //
 
 const samsung89 = new Product("samsung10k", 10000, "samsung Flat Tv", "89inch", "led") 

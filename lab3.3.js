@@ -370,4 +370,89 @@ const myAlarmClock = new AlarmClock('ALARM', '15:41');
 //myAlarmClock.start();
 
 
+// 9. We can delay execution of a function using setTimeout, where we need to provide both
+// the callback function and the delay after which it should execute.
+// a) Create a promise-based alternative randomDelay() that delays execution for a
+// random amount of time (between 1 and 20 seconds) and returns a promise we can use
+// via .then(), as in the starter code below
+// b) If the random delay is even, consider this a successful delay and resolve the promise,
+// and if the random number is odd, consider this a failure and reject it
+// c) Update the testing code to catch rejected promises and print a different message
+// d) Try to update the then and catch messages to include the random delay value
+
+function randomDelay() {
+    // your code
+    let delay = Math.ceil(Math.random() * 20);
+    return new Promise(resolve => setTimeout(resolve, delay*1000));
+    }
+    randomDelay()
+    .then((delay) => console.log('There appears to have been a delay.'));
+    function randomDelayB() {
+    let delay = Math.ceil(Math.random() * 20);
+    return new Promise((resolve, reject) =>
+    // if even delay the resolve function, if odd delay the reject function
+    setTimeout((delay % 2 === 0) ? resolve : reject, delay*1000));
+    }
+    randomDelayB()
+    .then(() => console.log('Successful delay'))
+    .catch(() => console.log('Failed delay'));
+    function randomDelayD() {
+    let delay = Math.ceil(Math.random() * 20);
+    return new Promise((resolve, reject) =>
+    setTimeout((delay % 2 === 0) ? resolve : reject, delay*1000, delay));
+    }
+    randomDelayD()
+    
+    .then((delay) => console.log('Successful delay of '+delay+' seconds'))
+    .catch((delay) => console.log('Failed delay of '+delay+' seconds'));
+
+
  
+    // 10.Fetch is a browser-based function to send a request and receive a response from a server,
+    // which uses promises to handle the asynchronous response.
+    // The below fetchURLData uses fetch to check the response for a successful status
+    // code, and returns a promise containing the JSON sent by the remote server if successful
+    // or an error if it failed. (To run this code in a node.js environment, follow the instructions in
+    // the comments before the function.)
+    // a) Write a new version of this function using async/await
+    // b) Test both functions with valid and invalid URLs
+    // c) (Extension) Extend your new function to accept an array of URLs and fetch all of them,
+    // using Promise.all to combine the results.
+
+
+    fetchURLData('https://jsonplaceholder.typicode.com/todos/1') //works, prints result
+.then(data => console.log(data))
+.catch(error => console.error(error.message));
+fetchURLData('https://jsonplaceholder.typicode.com/fake') //doesn't exist, prints catch
+.then(data => console.log(data))
+.catch(error => console.error(error.message));
+async function asyncFetchURLData(url) { //a)
+let fetchResponse = await fetch(url);
+
+if (fetchResponse.status === 200) {
+let responseJson = await fetchResponse.json();
+return responseJson;
+} else {
+throw new Error(`Request failed with status ${fetchResponse.status}`);
+}
+}
+async function asyncFetchMultipleURLData(urls) { //c)
+return Promise.all(urls.map(async (url) => {
+let response = await fetch(url);
+return response.json();
+}));
+}
+try {
+let responseData1 = await
+asyncFetchURLData('https://jsonplaceholder.typicode.com/todos/1');
+console.log(responseData1) //works
+let responseData2 = await
+asyncFetchMultipleURLData(['https://jsonplaceholder.typicode.com/todos/1',
+'https://jsonplaceholder.typicode.com/todos/2']);
+console.log(responseData2) //works
+let responseData3 = await
+asyncFetchURLData('https://jsonplaceholder.typicode.com/fake');
+console.log(responseData3) //fails
+} catch (error) {
+console.log(error.message);
+}
